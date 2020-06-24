@@ -1,0 +1,172 @@
+#===================================Markdown
+
+
+
+
+#===================================MATH------LaTex==========================================
+
+
+snippet s " " 
+$
+${1}
+$
+${0}
+endsnippet
+
+snippet ss
+$$
+${1}
+$$
+${0}
+endsnippet
+#===================================matrix
+snippet matrix
+\begin{matrix}
+${1} \\\\
+${2} \\\\
+\end{matrix}
+${0}
+endsnippet
+
+snippet matrixleft
+	\left|
+	\begin{matrix}
+		${1:&} \\\\
+		${2} \\\\
+	\end{matrix}
+	\right|
+endsnippet
+#===================================^
+snippet 2 " " i
+^2 ${0}
+endsnippet
+snippet 3 " " i
+^3 ${0}
+endsnippet
+snippet 4 " " i
+^4 ${0}
+endsnippet
+snippet 5 " " i
+^5 ${0}
+endsnippet
+snippet 6 " " i
+^6 ${0}
+endsnippet
+#===================================Big Operator
+snippet sum
+\sum_ ${1:down} ^ ${2:up} ${0}
+endsnippet
+
+snippet int "integral"
+\int_ {${1:down}} ^ {${2:up}} ${0}
+endsnippet
+
+snippet lim
+lim_{ ${1:left} \to ${2:right} } ${0}
+endsnippet
+#===================================Operator
+snippet frac "divide"
+\frac {${1}} {${2}} ${0}
+endsnippet
+
+snippet sqrt
+\sqrt [${1}] {${2}} ${0}
+endsnippet
+
+snippet +-
+\pm ${0}
+endsnippet
+
+snippet *
+\cdot ${0}
+endsnippet
+
+snippet U
+\cup ${0}
+endsnippet
+
+snippet N
+\cap ${0}
+endsnippet
+
+snippet >=
+\geq ${0}
+endsnippet
+
+snippet <=
+\leq ${0}
+endsnippet
+
+snippet !=
+\neq ${0}
+endsnippet
+
+snippet ~=
+\approx ${0}
+endsnippet
+#===================================Other
+snippet d "dots"
+\dots ${0}
+endsnippet
+
+snippet dd "cdots"
+\cdots ${0}
+endsnippet
+
+snippet 88 "unlimited"
+/infty ${0}
+endsnippet
+
+snippet v
+\overrightarrow{ ${1} } ${0}
+endsnippet
+#===================================array
+snippet array "array"
+$$
+\left\\{
+	\begin{array}{c}
+		${1} \\\\
+		${2} \\\\
+	\end{array}
+\right.
+$$
+endsnippet
+
+snippet arr "array" i
+\left\\{
+	\begin{array}{c}
+		${1} \\\\
+		${2} \\\\
+	\end{array}
+\right.
+endsnippet
+#===================================bracket
+snippet barcket "hallow bracket"
+\llbracket { ${0} } \rrbracket
+endsnippet
+#===================================blank
+snippet t "1em"
+\quad ${1}
+endsnippet
+
+snippet tt "2em"
+\qquad ${1}
+endsnippet
+
+#===================================effect #===================================
+snippet b "bold"
+\bm { ${1} }
+endsnippet
+#===================================Color
+snippet red 
+{\color{Red} { ${1} }}
+endsnippet
+#===================================Fortext
+snippet bf 
+\textbf${1}
+endsnippet
+
+snippet emph 
+\emph{ ${1} }
+endsnippet
+
