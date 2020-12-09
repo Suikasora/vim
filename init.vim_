@@ -134,7 +134,6 @@ noremap ; :
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
-"aihui
 noremap S :w<CR>
 
 " Open the vimrc file anytime
@@ -174,7 +173,7 @@ vnoremap <LEADER>tt :s/    /\t/g
 noremap <silent> <LEADER>o za
 
 " Open up lazygit
-noremap \g :Git
+noremap \g :Git 
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 
 
@@ -283,9 +282,6 @@ noremap ti :+tabnext<CR>
 " Move the tabs with tmn and tmi
 noremap tmn :-tabmove<CR>
 noremap tmi :+tabmove<CR>
-"aihui
-noremap t- :bprev<CR>
-noremap t= :bnext<CR>
 
 
 " ===
@@ -440,8 +436,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-
 " Error checking, handled by coc
 
 " Auto Complete
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 
 " Snippets
@@ -511,7 +506,7 @@ Plug 'theniceboy/antovim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
 Plug 'junegunn/vim-after-object' " da= to delete what's after =
-Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
+Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph, 
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
@@ -570,11 +565,6 @@ Plug 'roxma/nvim-yarp'
 
 "aihui-plug
 Plug 'lilydjwg/fcitx.vim'
-"Plug 'yianwillis/vimcdoc'
-Plug 'aihui/vimcdoc'
-Plug 'Yggdroot/indentLine'
-"Plug 'iamcco/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile && yarn run build'}
-Plug 'chrisbra/vim-diff-enhanced'
 call plug#end()
 
 " experimental
@@ -646,27 +636,22 @@ nnoremap gb :Gblame<CR>
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
 " use <tab> for trigger completion and navigate to the next complete item
-" aihui comment shita
-"
-"function! s:check_back_space() abort
-	"let col = col('.') - 1
-	"return !col || getline('.')[col - 1]	=~ '\s'
-"endfunction
-"inoremap <silent><expr> <TAB>
-			"\ pumvisible() ? "\<C-n>" :
-			"\ <SID>check_back_space() ? "\<TAB>" :
-			"\ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-"function! s:check_back_space() abort
-	"let col = col('.') - 1
-	"return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"inoremap <silent><expr> <c-space> coc#refresh()
-"inoremap <silent><expr> <c-o> coc#refresh()
-"
-"aihui add
-inoremap <silent> <TAB> <ESC>la
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]	=~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+	\ pumvisible() ? "\<C-n>" :
+	\ <SID>check_back_space() ? "\<TAB>" :
+	\ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-o> coc#refresh()
 
 " Open up coc-commands
 nnoremap <c-c> :CocCommand<CR>
@@ -687,7 +672,7 @@ nmap tt :CocCommand explorer<CR>
 nmap ts <Plug>(coc-translator-p)
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
-	execute 'CocCommand actions.open ' . a:type
+  execute 'CocCommand actions.open ' . a:type
 endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
@@ -751,21 +736,21 @@ let g:fzf_preview_window = 'right:60%'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 function! s:list_buffers()
-	redir => list
-	silent ls
-	redir END
-	return split(list, "\n")
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
 endfunction
 
 function! s:delete_buffers(lines)
-	execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
 endfunction
 
 command! BD call fzf#run(fzf#wrap({
-			\ 'source': s:list_buffers(),
-			\ 'sink*': { lines -> s:delete_buffers(lines) },
-			\ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-			\ }))
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
 
 noremap <c-d> :BD<CR>
 
@@ -859,10 +844,10 @@ let g:VM_maps["Redo"]      = '<C-r>'
 " ===
 " === Far.vim
 " ===
-"noremap <LEADER>f :F  **/*<left><left><left><left><left>
-"let g:far#mapping = {
-			"\ "replace_undo" : ["l"],
-			"\ }
+noremap <LEADER>f :F  **/*<left><left><left><left><left>
+let g:far#mapping = {
+		\ "replace_undo" : ["l"],
+		\ }
 
 
 " ===
@@ -875,10 +860,9 @@ let g:VM_maps["Redo"]      = '<C-r>'
 "endif
 
 
-" ===aih
+" ===
 " === Bullets.vim
-" ===aih
-"Bullets.vim is a Vim plugin for <<automated bullet lists.>>
+" ===
 "let g:bullets_set_mappings = 0
 let g:bullets_enabled_file_types = [
 			\ 'markdown',
@@ -897,9 +881,9 @@ let g:vista_default_executive = 'ctags'
 let g:vista_fzf_preview = ['right:50%']
 let g:vista#renderer#enable_icon = 1
 let g:vista#renderer#icons = {
-			\   "function": "\uf794",
-			\   "variable": "\uf71b",
-			\  }
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
 function! NearestMethodOrFunction() abort
 	return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
@@ -925,8 +909,8 @@ let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 " Solve extreme insert-mode lag on macOS (by disabling autotrigger)
 augroup ultisnips_no_auto_expansion
-	au!
-	au VimEnter * au! UltiSnips_AutoTrigger
+    au!
+    au VimEnter * au! UltiSnips_AutoTrigger
 augroup END
 
 
@@ -1011,32 +995,10 @@ let g:go_doc_keywordprg_enabled = 0
 " ===
 " === AutoFormat
 " ===
-"let g:formatdef_harttle = '"astyle --style=attch --pad-oper"'
-"let g:formatdef_harttle = '"astyle --style=google --pad-oper"'
-"let g:formatdef_harttle = '"astyle --style=ratliff --pad-oper"'
-"let g:formatters_java = ['harttle']
-"let g:formatters_cpp = ['harttle']
-"let g:formatdef_astyle_cpp = '"astyle --style=ratliff -s10 --pad-oper"'
-let g:formatdef_aih = '"astyle --style=attach --indent=spaces=2 --align-pointer=name --remove-braces --delete-empty-lines --pad-oper --pad-paren-out"'
-let g:formatdef_aih_shell='"shfmt "'
-let g:formatters_cpp = ['aih']
-let g:formatters_java = ['aih']
-let g:formatters_sh=['aih_shell']
+let g:formatdef_harttle = '"astyle --style=attch --pad-oper"'
+let g:formatters_java = ['harttle']
+let g:formatters_cpp = ['harttle']
 nnoremap \f :Autoformat<CR>
-"au BufWrite * :Autoformat<CR>
-"noremap S :call SaveAndAutoformat()<CR>
-"func! SaveAndAutoformat()
-	"if &filetype == 'java'
-		"exec "Autoformat"
-		"exec "w"
-	"elseif &filetype == 'cpp'
-		"exec "Autoformat"
-		"exec "w"
-	"else
-		"exec "w"
-	"endif
-"endfunc
-
 
 " ===
 " === OmniSharp
@@ -1176,7 +1138,7 @@ noremap \p :XTabInfo<CR>
 "set sessionoptions-=options
 "noremap sl :OpenSession<CR>
 "noremap sS :SaveSession<CR>
-"noremap ss :SaveSession
+"noremap ss :SaveSession 
 "noremap sc :SaveSession<CR>:CloseSession<CR>:q<CR>
 "noremap so :OpenSession default<CR>
 "noremap sD :DeleteSession<CR>
@@ -1241,11 +1203,11 @@ let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
 nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
 let g:rnvimr_layout = { 'relative': 'editor',
-			\ 'width': &columns,
-			\ 'height': &lines,
-			\ 'col': 0,
-			\ 'row': 0,
-			\ 'style': 'minimal' }
+            \ 'width': &columns,
+            \ 'height': &lines,
+            \ 'col': 0,
+            \ 'row': 0,
+            \ 'style': 'minimal' }
 let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 
 
@@ -1304,27 +1266,9 @@ if has_machine_specific_file == 0
 endif
 
 "_____________________________________________________________Aihui______________
-"=============aihui: skeleton from the past
-"inoremap <c-i> <Esc>la ====== <TAB>
-"=============
-"_____________________________________________________________Plug_______________
-" ===aih
-" === IndentLine
-" ===aih
-let g:indentLine_setColors = 1
-let g:indentLine_color_gui = '#000000'
-let g:indentLine_fileType = ['c', 'cpp','java','py','txt']
-"let g:indentLine_bgcolor_gui = '#FF5F00'
-let g:indentLine_char = '|'
-"let g:indentLine_char = '¦'
-"let g:indentLine_char =    '┆'
-"let g:indentLine_char =       '│'
-"let g:indentLine_char =          '⎸'
-"let g:indentLine_char =             '▏'
-"let g:indentLine_color_term = 239
-" ____________________________________________________________binds______________
 noremap ff $a;<Esc>
 "hi Normal guibg=NONE ctermbg=NONE
+inoremap <c-i> <Esc>la
 inoremap <c-s> $$<left>
 noremap 2o o<Esc>o
 noremap s1 :w !sudo tee %<CR>
@@ -1333,7 +1277,6 @@ noremap <c-m> 0i
 "copy all to system"
 nnoremap ya ggvG$"+y
 
-" ____________________________________________________________SETting______________
 let &termencoding=&encoding
 set fileencodings=utf-8,gbk
 " shift + 8 : search next this word

@@ -1,0 +1,46 @@
+snippet main "all" 
+public class ${1}{
+	public static void main(String[] args){
+		${0}
+	}
+}
+endsnippet
+
+snippet psvm "main" bA
+public static void main(String[] args){
+	${0}
+}
+endsnippet 
+
+snippet sopl "System.out.println()"
+System.out.println(${0});
+endsnippet
+snippet sop "System.out.print()"
+System.out.print(${0})
+endsnippet
+snippet sopf "System.out..printf()"
+System.out.printf(${0});
+endsnippet
+
+snippet scan "Scanner"
+Scanner ${0} = new Scanner(System.in);
+endsnippet
+
+#===================================import
+snippet util ""
+import java.util.*;${0}
+endsnippet
+
+snippet mainu ""
+import java.util.*;
+public class ${1}{
+	public static void main(String[] args){
+	Scanner sc = new Scanner(System.in);
+		${0}
+	}
+}
+endsnippet
+
+snippet format "Formatter"
+import java.util.Formatter;${0}
+endsnippet

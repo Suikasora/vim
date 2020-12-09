@@ -283,9 +283,6 @@ noremap ti :+tabnext<CR>
 " Move the tabs with tmn and tmi
 noremap tmn :-tabmove<CR>
 noremap tmi :+tabmove<CR>
-"aihui
-noremap t- :bprev<CR>
-noremap t= :bnext<CR>
 
 
 " ===
@@ -440,8 +437,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-
 " Error checking, handled by coc
 
 " Auto Complete
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 
 " Snippets
@@ -573,8 +569,6 @@ Plug 'lilydjwg/fcitx.vim'
 "Plug 'yianwillis/vimcdoc'
 Plug 'aihui/vimcdoc'
 Plug 'Yggdroot/indentLine'
-"Plug 'iamcco/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile && yarn run build'}
-Plug 'chrisbra/vim-diff-enhanced'
 call plug#end()
 
 " experimental
@@ -646,27 +640,22 @@ nnoremap gb :Gblame<CR>
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
 " use <tab> for trigger completion and navigate to the next complete item
-" aihui comment shita
-"
-"function! s:check_back_space() abort
-	"let col = col('.') - 1
-	"return !col || getline('.')[col - 1]	=~ '\s'
-"endfunction
-"inoremap <silent><expr> <TAB>
-			"\ pumvisible() ? "\<C-n>" :
-			"\ <SID>check_back_space() ? "\<TAB>" :
-			"\ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-"function! s:check_back_space() abort
-	"let col = col('.') - 1
-	"return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"inoremap <silent><expr> <c-space> coc#refresh()
-"inoremap <silent><expr> <c-o> coc#refresh()
-"
-"aihui add
-inoremap <silent> <TAB> <ESC>la
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]	=~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-o> coc#refresh()
 
 " Open up coc-commands
 nnoremap <c-c> :CocCommand<CR>
@@ -1017,7 +1006,7 @@ let g:go_doc_keywordprg_enabled = 0
 "let g:formatters_java = ['harttle']
 "let g:formatters_cpp = ['harttle']
 "let g:formatdef_astyle_cpp = '"astyle --style=ratliff -s10 --pad-oper"'
-let g:formatdef_aih = '"astyle --style=attach --indent=spaces=2 --align-pointer=name --remove-braces --delete-empty-lines --pad-oper --pad-paren-out"'
+let g:formatdef_aih = '"astyle --style=attach --indent=spaces=2 --pad-oper --align-pointer=name --remove-braces"'
 let g:formatdef_aih_shell='"shfmt "'
 let g:formatters_cpp = ['aih']
 let g:formatters_java = ['aih']
@@ -1313,7 +1302,6 @@ endif
 " ===aih
 let g:indentLine_setColors = 1
 let g:indentLine_color_gui = '#000000'
-let g:indentLine_fileType = ['c', 'cpp','java','py','txt']
 "let g:indentLine_bgcolor_gui = '#FF5F00'
 let g:indentLine_char = '|'
 "let g:indentLine_char = '¦'
